@@ -694,9 +694,9 @@ do
 
 				local timeText = "";
 				if ( remaining >= 3600 ) then
-					timeText = tostring( math.floor( remaining / 3600 ) ) .. "h";
+					timeText = tostring( math.ceil( remaining / 3600 ) ) .. "h";
 				elseif ( remaining >= 60 ) then
-					timeText = tostring( math.floor( remaining / 60 ) ) .. "m";
+					timeText = tostring( math.ceil( remaining / 60 ) ) .. "m";
 				elseif ( remaining > TENTHS_TRESHOLD ) then
 					timeText = tostring( math.floor( remaining ) );
 				elseif ( remaining > 0 ) then
