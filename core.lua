@@ -8,6 +8,11 @@ if ( TukuiUF ~= true and ( TukuiDB == nil or TukuiDB["unitframes"] == nil or not
 	castSpellId - fill only if you want to see line on bar that indicates if its safe to start casting spell and not clip the last tick, also note that this can be different from aura id
 ]]--
 local CreateSpellEntry = function( id, castByAnyone, color, unitType, castSpellId )
+	if type(id) == "string" then
+		local sID = (GetSpellLink(id) or ""):match("Hspell:(%d+)");
+		sID = sID and tonumber(sID);
+		if type(sID) == "number" then id = sID end
+	end
 	return { id = id, castByAnyone = castByAnyone, color = color, unitType = unitType or 0, castSpellId = castSpellId };
 end
 
