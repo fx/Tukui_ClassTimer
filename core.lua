@@ -1208,14 +1208,11 @@ else
 end
 
 if ( ATTENTION_FRAME and classFilter and classFilter.attn ) then
-	print("CREATING ATTENTION FRAME!");
 	local attnDataSource = CreateUnitAuraDataSource( "player" );
 	attnDataSource:SetSortDirection( SORT_DIRECTION );
 	attnDataSource:AddFilter( classFilter.attn, TRINKET_BAR_COLOR );
 
 	local attnFrame = CreateAuraBarFrame( attnDataSource, UIParent );
-	attnFrame:SetHiddenHeight( -yOffset );
-	attnFrame:ClearAllPoints();
 	attnFrame:SetPoint( "BOTTOMLEFT", UIParent, "CENTER", -100, 200 );
 	attnFrame:SetPoint( "BOTTOMRIGHT", UIParent, "CENTER", 100, 200 );
 	attnFrame:Show();
