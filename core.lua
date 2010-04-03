@@ -17,6 +17,9 @@ end
 
 -- Configuration starts here:
 
+-- Attention Frame? (Screen Center, for reactive procs that need near instant attention, like Slam! or Fireball!)
+local ATTENTION_FRAME = true;
+
 -- Bar height
 local BAR_HEIGHT = 20;
 
@@ -294,11 +297,18 @@ local CLASS_FILTERS = {
 				CreateSpellEntry( 43010 ), -- Fire Ward
 				CreateSpellEntry( 12472 ), -- Icy Veins
 				CreateSpellEntry( 12042 ), -- Arcane Power
+				CreateSpellEntry( 57669 ), -- Replenishment
 			},
 			procs = {
-				CreateSpellEntry( 44544 ), -- Fingers of Frost	
 				CreateSpellEntry( 44401 ), -- Missile Barrage Proc		
 				CreateSpellEntry( 70753 ), -- Pushing the Limit (2pc t10)
+				CreateSpellEntry( 74396 ), -- New Fingers of Frost?
+				CreateSpellEntry( 57761 ), -- Fireball!
+			},
+			attn = {
+				CreateSpellEntry( 44401 ), -- Missile Barrage Proc		
+				CreateSpellEntry( 74396 ), -- New Fingers of Frost?
+				CreateSpellEntry( 57761 ), -- Fireball!
 			},
 		},
 		PALADIN = { 
@@ -1189,4 +1199,18 @@ elseif ( LAYOUT == 4 ) then
 	targetFrame:Show();
 else
 	error( "Undefined layout " .. tostring( LAYOUT ) );
+end
+
+if ( ATTENTION_FRAME and classFilter and classFilter.attn ) then
+	print("CREATING ATTENTION FRAME!");
+	local attnDataSource = CreateUnitAuraDataSource( "player" );
+	attnDataSource:SetSortDirection( SORT_DIRECTION );
+	attnDataSource:AddFilter( classFilter.attn, TRINKET_BAR_COLOR );
+
+	local attnFrame = CreateAuraBarFrame( attnDataSource, UIParent );
+	attnFrame:SetHiddenHeight( -yOffset );
+	attnFrame:ClearAllPoints();
+	attnFrame:SetPoint( "BOTTOMLEFT", UIParent, "CENTER", -100, 200 );
+	attnFrame:SetPoint( "BOTTOMRIGHT", UIParent, "CENTER", 100, 200 );
+	attnFrame:Show();
 end
