@@ -293,6 +293,7 @@ local CLASS_FILTERS = {
 		MAGE = {
 			target = {
 				CreateSpellEntry( 55360 ), -- Living Bomb
+				CreateSpellEntry( 22959 ), -- Imp Scorch
 			},
 			player = {
 				CreateSpellEntry( 36032 ), -- Arcane Blast
@@ -310,11 +311,13 @@ local CLASS_FILTERS = {
 				CreateSpellEntry( 70753 ), -- Pushing the Limit (2pc t10)
 				CreateSpellEntry( 74396 ), -- New Fingers of Frost?
 				CreateSpellEntry( 57761 ), -- Fireball!
+				CreateSpellEntry( 48108 ), -- Hot Streak
 			},
 			attn = {
 				CreateSpellEntry( 44401 ), -- Missile Barrage Proc		
 				CreateSpellEntry( 74396 ), -- New Fingers of Frost?
 				CreateSpellEntry( 57761 ), -- Fireball!
+				CreateSpellEntry( 48108 ), -- Hot Streak
 			},
 		},
 		PALADIN = {
@@ -445,10 +448,15 @@ local CLASS_FILTERS = {
 				CreateSpellEntry( 1719 ), -- Recklessness
 				CreateSpellEntry( 20230 ), -- Retaliation
 				CreateSpellEntry( 46916 ), -- Slam!
+				CreateSpellEntry( 12292 ), -- Death Wish
+				CreateSpellEntry( 12970 ), -- Flurry
 			},
 			procs = {
 
 			},
+			attn = {
+				CreateSpellEntry( 46916 ), -- Slam!
+			}
 		},
 	};
 
