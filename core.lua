@@ -875,7 +875,7 @@ do
 			end
 
 			local bar = CreateFrame( "StatusBar", nil, result, nil );
-			bar:SetStatusBarTexture( [=[Interface\Addons\Tukui\media\normTex]=] );
+			bar:SetStatusBarTexture( TukuiDB.media.normTex );
 			if ( bit.band( ICON_POSITION, 2 ) == 2 or bit.band( ICON_POSITION, 4 ) == 4 ) then
 				bar:SetPoint( "TOPLEFT", result, "TOPLEFT", 0, 0 );
 				bar:SetPoint( "BOTTOMRIGHT", result, "BOTTOMRIGHT", 0, 0 );
@@ -1040,7 +1040,7 @@ do
 
 		local background = result:CreateTexture( nil, "BACKGROUND", nil );
 		background:SetAlpha( BACKGROUND_ALPHA );
-		background:SetTexture( [=[Interface\Addons\Tukui\media\normTex]=] );
+		background:SetTexture( TukuiDB.media.normTex );
 		background:SetPoint( "TOPLEFT", result, "TOPLEFT", 0, 0 );
 		background:SetPoint( "BOTTOMRIGHT", result, "BOTTOMRIGHT", 0, 0 );
 		background:SetVertexColor( 0.15, 0.15, 0.15 );
@@ -1050,7 +1050,7 @@ do
 		border:SetAlpha( BACKGROUND_ALPHA );
 		border:SetFrameStrata( "BACKGROUND" );
 		border:SetBackdrop( {
-			edgeFile = [=[Interface\Addons\Tukui\media\glowTex]=],
+			edgeFile = TukuiDB.media.glowTex,
 			edgeSize = 5,
 			insets = { left = 3, right = 3, top = 3, bottom = 3 }
 		} );
