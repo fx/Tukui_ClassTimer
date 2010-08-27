@@ -1,4 +1,4 @@
-if ( TukuiUF ~= true and ( TukuiDB == nil or TukuiDB["unitframes"] == nil or not TukuiDB["unitframes"]["enable"] ) ) then return; end
+if ( TukuiUF ~= true and ( TukuiCF == nil or TukuiCF["unitframes"] == nil or not TukuiCF["unitframes"]["enable"] ) ) then return; end
 
 --[[ Configuration functions - DO NOT TOUCH
 	id - spell id
@@ -66,12 +66,12 @@ local CAST_SEPARATOR_COLOR = CreateColor( 0, 0, 0, 0.5 );
 local TEXT_MARGIN = 5;
 
 local MASTER_FONT, STACKS_FONT;
-if ( TukuiDB and TukuiDB["media"] and TukuiDB["media"]["uffont"] ) then
+if ( TukuiCF and TukuiCF["media"] and TukuiCF["media"]["uffont"] ) then
 	-- Sets font for all texts
-	MASTER_FONT = { TukuiDB["media"]["uffont"], 12, "OUTLINE" };
+	MASTER_FONT = { TukuiCF["media"]["uffont"], 12, "OUTLINE" };
 
 	-- Sets font for stack count
-	STACKS_FONT = { TukuiDB["media"]["uffont"], 11, "OUTLINE" };
+	STACKS_FONT = { TukuiCF["media"]["uffont"], 11, "OUTLINE" };
 else
 	-- Sets font for all texts
 	MASTER_FONT = { [=[Interface\Addons\Tukui\media\Russel Square LT.ttf]=], 12, "OUTLINE" };
@@ -127,6 +127,7 @@ local TENTHS_TRESHOLD = 1
 
 -- Trinket filter - mostly for trinket procs, delete or wrap into comment block --[[  ]] if you dont want to track those
 local TRINKET_FILTER = {
+		CreateSpellEntry( 60064 ), -- Now is the time! (Sundial of the Exiled)
 		CreateSpellEntry( 67671 ), -- Fury(Banner of Victory)
 
 		CreateSpellEntry( 60229 ), -- Greatness (Greatness - Strength)
@@ -149,6 +150,7 @@ local TRINKET_FILTER = {
 		CreateSpellEntry( 71401 ), CreateSpellEntry( 71541 ), -- Icy Rage (Whispering Fanged Skull)
 		CreateSpellEntry( 71396 ), -- Herkuml War Token
 		CreateSpellEntry( 72412 ), -- Frostforged Champion (Ashen Band of Unmatched/Endless Might/Vengeance)
+		CreateSpellEntry( 72416 ), -- Frostforged Sage (Ashen Band of Unmatched/Endless Destruction)
 
 		CreateSpellEntry( 59626 ), -- Black Magic
 		CreateSpellEntry( 54758 ), -- Hyperspeed Acceleration (Hyperspeed Accelerators)
@@ -720,9 +722,9 @@ do
 
 				local timeText = "";
 				if ( remaining >= 3600 ) then
-					timeText = tostring( math.ceil( remaining / 3600 ) ) .. "h";
+					timeText = tostring( math.floor( remaining / 3600 ) ) .. "h";
 				elseif ( remaining >= 60 ) then
-					timeText = tostring( math.ceil( remaining / 60 ) ) .. "m";
+					timeText = tostring( math.floor( remaining / 60 ) ) .. "m";
 				elseif ( remaining > TENTHS_TRESHOLD ) then
 					timeText = tostring( math.floor( remaining ) );
 				elseif ( remaining > 0 ) then
@@ -875,7 +877,7 @@ do
 			end
 
 			local bar = CreateFrame( "StatusBar", nil, result, nil );
-			bar:SetStatusBarTexture( TukuiDB.media.normTex );
+			bar:SetStatusBarTexture( TukuiCF.media.normTex );
 			if ( bit.band( ICON_POSITION, 2 ) == 2 or bit.band( ICON_POSITION, 4 ) == 4 ) then
 				bar:SetPoint( "TOPLEFT", result, "TOPLEFT", 0, 0 );
 				bar:SetPoint( "BOTTOMRIGHT", result, "BOTTOMRIGHT", 0, 0 );
@@ -1040,7 +1042,7 @@ do
 
 		local background = result:CreateTexture( nil, "BACKGROUND", nil );
 		background:SetAlpha( BACKGROUND_ALPHA );
-		background:SetTexture( TukuiDB.media.normTex );
+		background:SetTexture( TukuiCF.media.normTex );
 		background:SetPoint( "TOPLEFT", result, "TOPLEFT", 0, 0 );
 		background:SetPoint( "BOTTOMRIGHT", result, "BOTTOMRIGHT", 0, 0 );
 		background:SetVertexColor( 0.15, 0.15, 0.15 );
@@ -1050,7 +1052,7 @@ do
 		border:SetAlpha( BACKGROUND_ALPHA );
 		border:SetFrameStrata( "BACKGROUND" );
 		border:SetBackdrop( {
-			edgeFile = TukuiDB.media.glowTex,
+			edgeFile = TukuiCF.media.glowTex,
 			edgeSize = 5,
 			insets = { left = 3, right = 3, top = 3, bottom = 3 }
 		} );
